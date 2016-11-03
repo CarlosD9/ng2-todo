@@ -20,8 +20,9 @@
 <md-card>
 	<md-list>
 		<h3 md-line>{{title}}</h3>
-		<md-list-item *ngFor="let todo of todos">
+		<md-list-item *ngFor="let todo of todos | async">
 			<todo [todo]="todo"></todo>
+			<button md-raised-button color="accent" *ngIf="todo.done" (click)="deleteTodo(todo)">Delete!</button>
 		</md-list-item>
 	</md-list>
 </md-card>

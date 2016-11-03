@@ -34,4 +34,13 @@ export class TodoRootComponent implements OnInit {
             error => this.errorMessage = error);
     }
 
+    deleteTodo(todo: Todo): void {
+        this.todoService
+            .deleteT(todo.id)
+            .then(() => {
+                this.todos = this.todos.filter(t => t !== todo);
+                // if (this.selectedHero === hero) { this.selectedHero = null; }
+            });
+    }
+
 }

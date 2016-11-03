@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 
 import { Todo } from './todo';
 import { TODOS } from './mock-todos';
@@ -18,8 +19,9 @@ export class TodoService {
     // }
 
     getAll(): Observable<Todo[]> {
-        return this.http.get(this.todosUrl)
-        .map(res => res.json());
+        return this.http
+            .get(this.todosUrl)
+            .map(res => res.json());
     }
 
     private extractData(res: Response) {
@@ -45,16 +47,19 @@ export class TodoService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.post(this.todosUrl, todo, options)
-        .map(res => res.json());
+        return this.http
+            .post(this.todosUrl, todo, options)
+            .map(res => res.json());
     }
 
-//     delete(id: number): Promise<void> {
-//         const url = `${this.heroesUrl}/${id}`;
-//     return this.http.delete(url, {headers: this.headers})
-//         .toPromise()
-//         .then(() => null)
-//         .catch(this.handleError);
-// }
+    deleteT(id: number): Promise<void> {
+        const url = `${this.todosUrl}/${id}`;
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.delete(url, options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
 
 }

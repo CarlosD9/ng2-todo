@@ -1,0 +1,27 @@
+<md-card class="app-input-section">
+	<md-input #todoTitle placeholder="Title"></md-input>
+
+	<md-input #description placeholder="Description" maxlength="50">
+		<md-hint align="end">
+			{{description.characterCount}} / 50
+		</md-hint>
+	</md-input>
+
+	<md-input>
+		<md-placeholder>
+			<i class="material-icons app-input-icon">android</i> Favorite phone
+		</md-placeholder>
+	</md-input>
+
+	<button md-raised-button color="primary" (click)="addTodo(todoTitle.value); todoTitle.value=''">Add</button>
+
+</md-card>
+
+<md-card>
+	<md-list>
+		<h3 md-line>{{title}}</h3>
+		<md-list-item *ngFor="let todo of todos">
+			<todo [todo]="todo"></todo>
+		</md-list-item>
+	</md-list>
+</md-card>

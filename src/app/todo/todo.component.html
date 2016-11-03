@@ -1,0 +1,8 @@
+<div>
+    <p class="">
+        {{todo.owner}} -- {{todo.title}}
+        <button md-raised-button color="primary" *ngIf="!todo.done" (click)="changeState(todo)">Remaining!</button>
+        <button md-raised-button color="secundary" *ngIf="todo.done" (click)="changeState(todo)">Done!</button>
+        <button md-raised-button color="red" *ngIf="todo.done" (click)="delete(todo)">Delete!</button>
+    </p>
+</div>
